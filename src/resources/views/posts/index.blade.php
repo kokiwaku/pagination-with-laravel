@@ -16,15 +16,11 @@
     </head>
     <body>
         <div class="container m-2">
-            <div class="row">
-                <div class="col-md-12 my-2">
-                    <p class="font-weight-bold" style="font-size: 30px;">オフセットベースのページネーションのテスト</span></p>
-                </div>
-            </div>
             <table>
                 <thead>
                     <tr>
                         <th>No.</th>
+                        <th>primary_key</th>
                         <th>title</th>
                         <th>content</th>
                     </tr>
@@ -33,6 +29,7 @@
                     @foreach ($postsList as $key => $post)
                         <tr>
                             <td>{{ ++$key }}</td>
+                            <td>{{ $post->posts_id }}</td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->content }}</td>
                         </tr>

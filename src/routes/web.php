@@ -2,6 +2,7 @@
 
 use App\Models\Posts;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(DatabaseManager $databaseManager) {
+Route::get('/offset', function(DatabaseManager $databaseManager) {
 
     $databaseManager->enableQueryLog();
 
-    $postsList = Posts::query()->paginate(5);
+    $postsList = Posts::query()->orderBy('posts_id', 'asc')->paginate(5);
+
+    $query = $databaseManager->getQueryLog();
+
+    return view('posts.index', compact('postsList'));
+});
+
+Route::get('/cursor', function(DatabaseManager $databaseManager) {
+
+    $databaseManager->enableQueryLog();
+
+    $postsList = Posts::query()->orderBy('posts_id', 'asc')->cursorPaginate(5);
 
     $query = $databaseManager->getQueryLog();
 
