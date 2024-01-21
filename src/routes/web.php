@@ -3,6 +3,7 @@
 use App\Models\Posts;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -59,7 +60,7 @@ Route::get('/offset/manual', function(Request $request, DatabaseManager $databas
         currentPage: $pageNum,
         options: [
             // これを設定しないと、ページネーションのリンクが正しく生成されない（固定で「/?page=*」へのアクセスになってしまう）
-            'path' => Paginator::resolveCurrentPath(),
+            'path' => LengthAwarePaginator::resolveCurrentPath(),
         ]
     );
 
