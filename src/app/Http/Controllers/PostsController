@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Posts;
+use App\Http\Controllers\Controller;
+
+class PostsController extends Controller
+{
+    public function index()
+    {
+        $postsData = Posts::all()->toArray();
+
+        return view('posts.index', $postsData);
+    }
+}
